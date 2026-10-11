@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Radio, Zap } from "lucide-react";
+import { Radio } from "lucide-react";
 import { useSim, type FeedLevel } from "@/lib/store";
 import { NG_SERIAL } from "@/lib/mock-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -52,7 +52,6 @@ export function EdgeFeed() {
         <div className="rounded-lg border border-dashed border-slate-300 p-3">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">Demo Simulator</div>
           <Button variant="danger" className="w-full whitespace-nowrap" onClick={triggerIncident} disabled={incident}>
-            <Zap className="h-4 w-4" />
             {incident ? (
               `Sự cố ${NG_SERIAL} đã kích hoạt`
             ) : (

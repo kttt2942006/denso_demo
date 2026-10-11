@@ -17,9 +17,19 @@ export function QuarantinePanel() {
   const savedPct = (saved / LOT_SIZE) * 100;
 
   const exportCsv = () => {
-    const rows = ["serial,machine,window,status", ...QUARANTINE.map((s) => `${s},CNC-03,08:31-09:05,${s === NG_SERIAL ? "NG" : "SUSPECT"}`)];
-    const url = URL.createObjectURL(new Blob([rows.join("\n")], { type: "text/csv" }));
-    const a = Object.assign(document.createElement("a"), { href: url, download: "quarantine_INC-2026-1014.csv" });
+    const rows = [
+      "serial,machine,window,status",
+      ...QUARANTINE.map(
+        (s) => `${s},CNC-03,08:31-09:05,${s === NG_SERIAL ? "NG" : "SUSPECT"}`,
+      ),
+    ];
+    const url = URL.createObjectURL(
+      new Blob([rows.join("\n")], { type: "text/csv" }),
+    );
+    const a = Object.assign(document.createElement("a"), {
+      href: url,
+      download: "quarantine_INC-2026-1014.csv",
+    });
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -40,9 +50,17 @@ export function QuarantinePanel() {
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-3">
         <div className="grid grid-cols-3 gap-2 text-center">
-          <Stat value={QUARANTINE.length} label="Serial nghi vấn cần cách ly" tone="text-ng-fg" />
-          <Stat value={LOT_SIZE} label="Cả lô nếu xử lý thủ công" tone="text-slate-500 line-through decoration-2" />
-          <Stat value={saved} label="Sản phẩm an toàn được cứu" tone="text-ok-fg" />
+          <Stat
+            value={QUARANTINE.length}
+            label="Serial nghi vấn cần cách ly"
+            tone="text-ng-fg"
+          />
+          <Stat
+            value={LOT_SIZE}
+            label="Cả lô nếu xử lý thủ công"
+            tone="text-slate-500 line-through decoration-2"
+          />
+          <Stat value={saved} label="Sản phẩm an toàn" tone="text-ok-fg" />
         </div>
         <div>
           <div className="flex h-3 overflow-hidden rounded-full">
@@ -50,11 +68,15 @@ export function QuarantinePanel() {
             <div className="bg-ok/80" style={{ width: `${savedPct}%` }} />
           </div>
           <div className="mt-1 text-xs text-slate-500">
-            Giảm <b className="text-ok-fg">{fmt(savedPct, 1)}%</b> phế phẩm loại oan so với cách ly cả lô Lot_A08
+            Giảm <b className="text-ok-fg">{fmt(savedPct, 1)}%</b> phế phẩm loại
+            oan so với cách ly cả lô Lot_A08
           </div>
         </div>
 
-        <div className="text-xs font-semibold text-slate-500">{QUARANTINE.length} Serial cùng mẻ gia công lúc CNC-03 bị rung (08:31 – 09:05)</div>
+        <div className="text-xs font-semibold text-slate-500">
+          {QUARANTINE.length} Serial cùng mẻ gia công lúc CNC-03 bị rung (08:31
+          – 09:05)
+        </div>
         <div className=" grid max-h-[148px] grid-cols-3 gap-1.5 overflow-y-auto rounded-lg bg-slate-50 p-2 sm:grid-cols-4 xl:grid-cols-6">
           {QUARANTINE.map((s) => (
             <Link
@@ -62,7 +84,9 @@ export function QuarantinePanel() {
               href={`/lineage/${s}`}
               className={cn(
                 "flex items-center justify-center gap-1 rounded border bg-white px-1 py-1 font-mono text-xs transition-colors hover:border-blue-400",
-                s === NG_SERIAL ? "border-red-300 font-bold text-ng-fg" : "border-slate-200 text-slate-700",
+                s === NG_SERIAL
+                  ? "border-red-300 font-bold text-ng-fg"
+                  : "border-slate-200 text-slate-700",
                 erpSynced && "bg-slate-100",
               )}
             >
@@ -73,12 +97,32 @@ export function QuarantinePanel() {
         </div>
 
         <div className="mt-auto space-y-2">
-          <Button variant={erpSynced ? "outline" : "teal"} className={cn("w-full whitespace-nowrap", erpSynced && "disabled:opacity-100")} onClick={onSync} disabled={erpSynced || syncing}>
-            {syncing ? <Loader2 className="h-4 w-4 animate-spin" /> : erpSynced ? <CheckCircle2 className="h-4 w-4 text-ok-fg" /> : <RefreshCw className="h-4 w-4" />}
-            {erpSynced ? "Đã đồng bộ lệnh khóa lên ERP/WMS" : "Đồng bộ lệnh khóa lên ERP/WMS"}
+          <Button
+            variant={erpSynced ? "outline" : "teal"}
+            className={cn(
+              "w-full whitespace-nowrap",
+              erpSynced && "disabled:opacity-100",
+            )}
+            onClick={onSync}
+            disabled={erpSynced || syncing}
+          >
+            {syncing ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : erpSynced ? (
+              <CheckCircle2 className="h-4 w-4 text-ok-fg" />
+            ) : (
+              <RefreshCw className="h-4 w-4" />
+            )}
+            {erpSynced
+              ? "Đã đồng bộ lệnh khóa lên ERP/WMS"
+              : "Đồng bộ lệnh khóa lên ERP/WMS"}
           </Button>
           <div className="flex items-center gap-2">
-            <Button variant="outline" className="whitespace-nowrap" onClick={exportCsv}>
+            <Button
+              variant="outline"
+              className="whitespace-nowrap"
+              onClick={exportCsv}
+            >
               <Download className="h-4 w-4" /> Xuất danh sách (CSV)
             </Button>
             {erpSynced && <Badge tone="warn">48 mã đã khóa</Badge>}
@@ -89,10 +133,20 @@ export function QuarantinePanel() {
   );
 }
 
-function Stat({ value, label, tone }: { value: number; label: string; tone: string }) {
+function Stat({
+  value,
+  label,
+  tone,
+}: {
+  value: number;
+  label: string;
+  tone: string;
+}) {
   return (
     <div className="rounded-lg border border-slate-200 p-2">
-      <div className={cn("font-mono text-2xl font-bold tabular-nums", tone)}>{fmt(value)}</div>
+      <div className={cn("font-mono text-2xl font-bold tabular-nums", tone)}>
+        {fmt(value)}
+      </div>
       <div className="text-xs leading-tight text-slate-500">{label}</div>
     </div>
   );
