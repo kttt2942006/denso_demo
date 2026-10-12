@@ -1,7 +1,6 @@
 "use client";
 
 import { Bar, BarChart, Cell, LabelList, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { BrainCircuit } from "lucide-react";
 import { SHAP } from "@/lib/mock-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -9,8 +8,7 @@ export function ShapChart() {
   return (
     <Card className="h-full">
       <CardHeader>
-        <CardTitle>Khối 1 · Bóc tách nguyên nhân gốc (TreeSHAP RCA)</CardTitle>
-        <span className="text-xs text-slate-500">XGBoost + TreeSHAP</span>
+        <CardTitle>Khối 1 · Bóc tách nguyên nhân</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="mb-1 text-xs text-slate-500">Mức đóng góp vào lỗi lệch dung sai (SHAP value, %)</div>
@@ -26,13 +24,6 @@ export function ShapChart() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        <div className="mt-3 flex gap-3 rounded-lg border border-blue-100 bg-blue-50/60 p-3 text-sm text-slate-700">
-          <BrainCircuit className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-          <p>
-            <b className="text-navy">Kết luận AI:</b> Lỗi lệch dung sai đường kính ngoài (+0,025 mm) do <b className="text-ng-fg">bạc đạn trục chính CNC-03 bị rơ lắc</b> (rung
-            2,85g, gấp 1,9× ngưỡng) kết hợp <b className="text-warn-fg">dao tiện T04 đã mòn</b> (tuổi thọ 94%). Nhiệt độ dầu cắt chỉ là yếu tố phụ.
-          </p>
-        </div>
       </CardContent>
     </Card>
   );

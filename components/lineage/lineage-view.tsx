@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, Database, Search, Timer } from "lucide-react";
+import { ArrowRight, Database, Search, Timer } from "lucide-react";
 import { getLineage, INCIDENT_ID } from "@/lib/mock-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button, buttonClass } from "@/components/ui/button";
@@ -34,10 +34,7 @@ export function LineageView({ serial }: { serial: string }) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-3">
-        <Link href="/" className="flex items-center gap-1 py-1.5 text-sm text-slate-500 hover:text-navy">
-          <ArrowLeft className="h-4 w-4" /> Tổng quan
-        </Link>
-        <h1 className="text-lg font-bold text-navy">Hộ chiếu sản phẩm số <span className="font-normal text-slate-500">(Digital Product Passport)</span></h1>
+        <h1 className="text-lg font-bold text-navy">Hộ chiếu sản phẩm số</h1>
         <form onSubmit={onSearch} className="ml-auto flex items-center gap-2">
           <div className="relative">
             <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
@@ -57,10 +54,13 @@ export function LineageView({ serial }: { serial: string }) {
       <div className="grid gap-4 lg:grid-cols-[1fr_400px]">
         <Card className="flex flex-col">
           <CardHeader>
-            <CardTitle>Mạng lưới đồ thị phả hệ (Interactive Graph View)</CardTitle>
+            <CardTitle>
+              Mạng lưới đồ thị phả hệ (Interactive Graph View)
+            </CardTitle>
             <div className="flex items-center gap-3 text-xs text-slate-500">
               <span className="flex items-center gap-1">
-                <Database className="h-3.5 w-3.5 text-teal-600" /> Neo4j · {lineage.nodes.length} node · {lineage.edges.length} quan hệ
+                <Database className="h-3.5 w-3.5 text-teal-600" /> Neo4j ·{" "}
+                {lineage.nodes.length} node · {lineage.edges.length} quan hệ
               </span>
               {queryMs !== null && (
                 <span className="flex items-center gap-1 rounded bg-green-50 px-1.5 py-0.5 font-mono font-semibold text-ok-fg">
@@ -70,22 +70,28 @@ export function LineageView({ serial }: { serial: string }) {
             </div>
           </CardHeader>
           <div className="h-[560px]">
-            <LineageGraph lineage={lineage} selected={selected} onSelect={setSelected} />
+            <LineageGraph
+              lineage={lineage}
+              selected={selected}
+              onSelect={setSelected}
+            />
           </div>
         </Card>
 
         <Card className="flex flex-col">
           <CardHeader>
-            <CardTitle>Thuộc tính chi tiết (Metadata Inspector)</CardTitle>
+            <CardTitle>Thuộc tính chi tiết</CardTitle>
             <span className="text-xs text-slate-500">Click node để xem</span>
           </CardHeader>
           <CardContent className=" max-h-[560px] flex-1 overflow-y-auto">
             <Inspector node={node} lineage={lineage} />
           </CardContent>
           <details className="border-t border-slate-100 px-4 py-2 text-xs text-slate-500">
-            <summary className="cursor-pointer font-semibold">Truy vấn Cypher</summary>
+            <summary className="cursor-pointer font-semibold">
+              Truy vấn Cypher
+            </summary>
             <pre className="mt-2 overflow-x-auto rounded bg-navy p-2 font-mono text-xs leading-relaxed text-teal-100">
-{`MATCH path = (o:Order)-[:QUẢN_LÝ_LÔ]->(l:Lot)
+              {`MATCH path = (o:Order)-[:QUẢN_LÝ_LÔ]->(l:Lot)
   -[:CẤP_PHÔI_CHO]->(p:Product {serial: '${lineage.serial}'})
 OPTIONAL MATCH (p)-[r]->(x)
 RETURN path, r, x`}
@@ -94,12 +100,19 @@ RETURN path, r, x`}
         </Card>
       </div>
 
-      <Link
-        href={`/incident/${INCIDENT_ID}?serial=${lineage.serial}`}
-        className={buttonClass(lineage.isNG ? "danger" : "primary", "lg", "w-full text-base")}
-      >
-        Chuyển sang Phân tích Nguyên nhân Gốc (TreeSHAP RCA) & Lan truyền Tác động <ArrowRight className="h-5 w-5" />
-      </Link>
+      <div className="flex justify-center">
+        <Link
+          href={`/incident/${INCIDENT_ID}?serial=${lineage.serial}`}
+          className={buttonClass(
+            lineage.isNG ? "danger" : "primary",
+            "lg",
+            "text-base",
+          )}
+        >
+          Phân tích Nguyên nhân và Lan truyền Tác động{" "}
+          <ArrowRight className="h-5 w-5" />
+        </Link>
+      </div>
     </div>
   );
 }

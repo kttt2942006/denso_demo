@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { NG_SERIAL } from "@/lib/mock-data";
+import { INCIDENT_ID, NG_SERIAL } from "@/lib/mock-data";
 import { ShapChart } from "@/components/incident/shap-chart";
 import { QuarantinePanel } from "@/components/incident/quarantine-panel";
 import { WhatIf } from "@/components/incident/what-if";

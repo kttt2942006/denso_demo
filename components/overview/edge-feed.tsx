@@ -49,9 +49,9 @@ export function EdgeFeed() {
             );
           })}
         </ul>
-        <div className="rounded-lg border border-dashed border-slate-300 p-3">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">Demo Simulator</div>
-          <Button variant="danger" className="w-full whitespace-nowrap" onClick={triggerIncident} disabled={incident}>
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-dashed border-slate-300 p-3">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Demo Simulator</div>
+          <Button variant="danger" className="w-fit shrink-0 whitespace-nowrap" onClick={triggerIncident} disabled={incident}>
             {incident ? (
               `Sự cố ${NG_SERIAL} đã kích hoạt`
             ) : (

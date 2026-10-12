@@ -20,17 +20,19 @@ export function AppHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2.5 lg:px-6">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-navy text-white">
-            <Waypoints className="h-4 w-4" />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-sm font-bold text-navy">TraceGraph AI</span>
-          </span>
-        </Link>
+      <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-y-2 px-4 py-2.5 lg:px-6">
+        <div className="flex items-center lg:flex-1">
+          <Link href="/" className="flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-navy text-white">
+              <Waypoints className="h-4 w-4" />
+            </span>
+            <span className="leading-tight">
+              <span className="block text-sm font-bold text-navy">TraceGraph AI</span>
+            </span>
+          </Link>
+        </div>
 
-        <nav className="order-3 flex w-full items-center gap-1 overflow-x-auto lg:order-none lg:w-auto lg:ml-[5%]">
+        <nav className="order-3 flex w-full items-center justify-center gap-1 overflow-x-auto lg:order-none lg:w-auto">
           {steps.map((s, i) => {
             const active = s.match(pathname);
             return (
@@ -51,7 +53,7 @@ export function AppHeader() {
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2 lg:flex-1">
           <span className="hidden text-xs text-slate-500 xl:inline">Ca 1: 06:00 – 14:00</span>
           <span className="rounded-md bg-slate-100 px-2 py-1 font-mono text-xs tabular-nums text-navy">{clock(simTime)}</span>
           <span

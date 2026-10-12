@@ -46,19 +46,13 @@ export function QuarantinePanel() {
     <Card className="flex h-full flex-col">
       <CardHeader>
         <CardTitle>Khối 2 · Lan truyền tác động & danh sách cách ly</CardTitle>
-        <span className="text-xs text-slate-500">Forward Impact Traversal</span>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-3">
-        <div className="grid grid-cols-3 gap-2 text-center">
+        <div className="grid grid-cols-2 gap-2 text-center">
           <Stat
             value={QUARANTINE.length}
             label="Serial nghi vấn cần cách ly"
             tone="text-ng-fg"
-          />
-          <Stat
-            value={LOT_SIZE}
-            label="Cả lô nếu xử lý thủ công"
-            tone="text-slate-500 line-through decoration-2"
           />
           <Stat value={saved} label="Sản phẩm an toàn" tone="text-ok-fg" />
         </div>
@@ -96,11 +90,11 @@ export function QuarantinePanel() {
           ))}
         </div>
 
-        <div className="mt-auto space-y-2">
+        <div className="mt-auto flex items-center gap-2">
           <Button
             variant={erpSynced ? "outline" : "teal"}
             className={cn(
-              "w-full whitespace-nowrap",
+              "flex-1 whitespace-nowrap",
               erpSynced && "disabled:opacity-100",
             )}
             onClick={onSync}
@@ -117,16 +111,14 @@ export function QuarantinePanel() {
               ? "Đã đồng bộ lệnh khóa lên ERP/WMS"
               : "Đồng bộ lệnh khóa lên ERP/WMS"}
           </Button>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              className="whitespace-nowrap"
-              onClick={exportCsv}
-            >
-              <Download className="h-4 w-4" /> Xuất danh sách (CSV)
-            </Button>
-            {erpSynced && <Badge tone="warn">48 mã đã khóa</Badge>}
-          </div>
+          <Button
+            variant="outline"
+            className="whitespace-nowrap"
+            onClick={exportCsv}
+          >
+            <Download className="h-4 w-4" /> Xuất danh sách (CSV)
+          </Button>
+          {erpSynced && <Badge tone="warn">48 mã đã khóa</Badge>}
         </div>
       </CardContent>
     </Card>
