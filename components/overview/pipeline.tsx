@@ -73,7 +73,7 @@ function StageCard({ n, title, icon: Icon, line, sub, rate, status }: StageProps
     </div>
   );
   return isNgStage ? (
-    <Link href={`/lineage/${NG_SERIAL}`} className="block h-full w-full">
+    <Link href={`/lineage/${NG_SERIAL}`} prefetch={true} className="block h-full w-full">
       {body}
     </Link>
   ) : (

@@ -11,7 +11,8 @@ export function AlertBanner() {
   return (
     <Link
       href={`/lineage/${NG_SERIAL}`}
-      className="flex animate-slidein items-center gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-ng-fg transition-colors hover:bg-red-100"
+      prefetch={true}
+      className="flex animate-slidein cursor-pointer items-center gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-ng-fg transition-all hover:bg-red-100 active:scale-[0.99] active:bg-red-200"
     >
       <AlertOctagon className="h-5 w-5 shrink-0 animate-blink" />
       <span className="flex-1">
