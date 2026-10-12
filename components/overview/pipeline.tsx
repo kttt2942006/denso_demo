@@ -22,10 +22,6 @@ export function Pipeline() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Bản đồ luồng 5 công đoạn sản xuất (Pipeline Data Flow)</CardTitle>
-        <span className="text-xs text-slate-500">Thông lượng: phôi / giờ</span>
-      </CardHeader>
       <CardContent className="overflow-x-auto ">
         <div className="flex min-w-[860px] items-stretch">
           {stages.map((s, i) => (

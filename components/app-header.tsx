@@ -28,11 +28,10 @@ export function AppHeader() {
           </span>
           <span className="leading-tight">
             <span className="block text-sm font-bold text-navy">TraceGraph AI</span>
-            <span className="block text-xs text-slate-500 lg:hidden xl:block">DENSO DMVN · Line #03 CNC Machining</span>
           </span>
         </Link>
 
-        <nav className="order-3 flex w-full items-center gap-1 overflow-x-auto lg:order-none lg:w-auto">
+        <nav className="order-3 flex w-full items-center gap-1 overflow-x-auto lg:order-none lg:w-auto lg:ml-[5%]">
           {steps.map((s, i) => {
             const active = s.match(pathname);
             return (
