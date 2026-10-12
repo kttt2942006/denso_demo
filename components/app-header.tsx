@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { Activity, GitBranch, Pause, Play, RotateCcw, ShieldAlert, Waypoints } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Activity, GitBranch, Pause, Play, ShieldAlert, Waypoints } from "lucide-react";
 import { useSim } from "@/lib/store";
 import { INCIDENT_ID, NG_SERIAL } from "@/lib/mock-data";
 import { clock, cn } from "@/lib/utils";
@@ -16,8 +16,7 @@ const steps = [
 
 export function AppHeader() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { simTime, incident, running, setRunning, reset } = useSim();
+  const { simTime, incident, running, setRunning } = useSim();
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
@@ -66,17 +65,6 @@ export function AppHeader() {
           </span>
           <Button variant="ghost" size="sm" onClick={() => setRunning(!running)} aria-label={running ? "Tạm dừng" : "Tiếp tục"} title={running ? "Tạm dừng luồng dữ liệu" : "Tiếp tục"}>
             {running ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              reset();
-              router.push("/");
-            }}
-            title="Đưa toàn bộ demo về trạng thái ban đầu"
-          >
-            <RotateCcw className="h-3.5 w-3.5" /> Reset demo
           </Button>
         </div>
       </div>
