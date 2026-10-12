@@ -6,12 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function ShapChart() {
   return (
-    <Card className="h-full">
+    <Card className="flex h-full flex-col">
       <CardHeader>
         <CardTitle>Khối 1 · Bóc tách nguyên nhân</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="mb-1 text-xs text-slate-500">Mức đóng góp vào lỗi lệch dung sai (SHAP value, %)</div>
+      <CardContent className="flex flex-1 flex-col">
         <ResponsiveContainer width="100%" height={170}>
           <BarChart data={SHAP} layout="vertical" margin={{ top: 4, right: 48, bottom: 4, left: 0 }}>
             <XAxis type="number" domain={[0, 100]} hide />
@@ -24,6 +23,9 @@ export function ShapChart() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        <div className="mt-auto text-right text-xs text-slate-500">
+          Mức đóng góp vào lỗi lệch dung sai (SHAP value, %)
+        </div>
       </CardContent>
     </Card>
   );
